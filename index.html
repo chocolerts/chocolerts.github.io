@@ -41,6 +41,19 @@
             margin-bottom: 8px; /* Adds space between the logo and "VCRT" */
             border-radius: 10px; /* Optional: gives your logo rounded corners */
         }
+        .forgot-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
         button {
             width: 100%;
             padding: 12px;
@@ -65,6 +78,7 @@
         <input type="text" id="usercode" placeholder="Usercode">
         <input type="password" id="password" placeholder="Password">
         <button onclick="checkLogin()">Enter Website</button>
+        <a class="forgot-link" onclick="forgotAlert()">Forgot Usercode?</a>
         <p id="error-msg">Incorrect credentials. Try again.</p>
     </div>
 
@@ -79,6 +93,10 @@
         var user = document.getElementById("usercode").value;
         var pass = document.getElementById("password").value;
         var error = document.getElementById("error-msg");
+
+    function forgotAlert() {
+        alert("Please contact the Administrator (Admin) to recover your usercode or password.");
+    }
 
         // LIST OF AUTHORIZED USERS
         var users = [
