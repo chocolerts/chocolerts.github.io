@@ -64,24 +64,34 @@
     </div>
 
     <script>
-        function checkLogin() {
-            var user = document.getElementById("usercode").value;
-            var pass = document.getElementById("password").value;
+    function checkLogin() {
+        var user = document.getElementById("usercode").value;
+        var pass = document.getElementById("password").value;
+        var error = document.getElementById("error-msg");
 
-            // CHANGE THESE TO WHATEVER YOU WANT
-            var correctUser = "zeeqy";
-            var correctPass = "cihuy";
+        // LIST OF AUTHORIZED USERS
+        var users = [
+            { name: "choco", code: "dila" },
+            { name: "nurin", code: "tekcik" },
+            { name: "noureen", code: "tekbut" } // Add as many as you want here
+        ];
 
-            if (user === correctUser && pass === correctPass) {
-                document.getElementById("login-section").style.display = "none";
-                document.getElementById("content-section").style.display = "block";
-                document.body.style.backgroundColor = "#ffffff";
-                document.body.style.color = "#000000";
-            } else {
-                document.getElementById("error-msg").style.display = "block";
-            }
+        // This checks if the typed info matches anyone in the list
+        var foundUser = users.find(u => u.name === user && u.code === pass);
+
+        if (foundUser) {
+            // Success! 
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("content-section").style.display = "block";
+            // Makes the page look "cleaner" after login
+            document.body.style.backgroundColor = "#ffffff";
+            document.body.style.color = "#000000";
+        } else {
+            // Error!
+            error.style.display = "block";
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
