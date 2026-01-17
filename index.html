@@ -94,10 +94,6 @@
         var pass = document.getElementById("password").value;
         var error = document.getElementById("error-msg");
 
-    function forgotAlert() {
-        alert("Please contact the Administrator (Admin) to recover your usercode or password.");
-    }
-
         // LIST OF AUTHORIZED USERS
         var users = [
             { name: "choco", code: "haziq" },
@@ -119,6 +115,10 @@
             // Error!
             error.style.display = "block";
         }
+    }
+
+    function forgotAlert() {
+        alert("Please contact the Administrator (Admin) to recover your usercode or password.");
     }
 </script>
 
