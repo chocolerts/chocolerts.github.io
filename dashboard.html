@@ -3,241 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VCRT Panel | Dashboard</title>
+    <title>VCRT | Velocity Academy Dashboard</title>
     <style>
+        /* EXACT COLOR PALETTE FROM PHOTO */
         :root {
-            --primary-orange: #f39c12;
-            --dark-bg: #121212;
-            --card-bg: #252525;
-            --sidebar-bg: #1e1e1e;
-            --text-gray: #b3b3b3;
+            --v-orange: #ff8c00;
+            --v-dark-grey: #2c2f33;
+            --v-sidebar: #1e1e1e;
+            --v-bg: #f4f4f4;
+            --v-black: #121212;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            background-color: var(--v-bg);
+            color: #333;
+        }
+
+        /* 1. TOP HERO SECTION (RACING HEADER) */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('your-racing-bg.jpg'); /* Replace with your image link */
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-banner h1 {
+            font-style: italic;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        /* THE "FUEL THE BUILD" SLANTED BUTTON */
+        .fuel-btn {
+            margin-top: 20px;
+            background: linear-gradient(90deg, #ffb347, #ff8c00);
+            padding: 12px 40px;
+            font-weight: bold;
+            font-style: italic;
+            color: white;
+            text-transform: uppercase;
+            clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,140,0,0.4);
+        }
+
+        /* THE JAGGED ORANGE DIVIDER */
+        .orange-divider {
+            height: 40px;
+            background: var(--v-orange);
+            width: 100%;
+            clip-path: polygon(0 80%, 35% 80%, 38% 0%, 62% 0%, 65% 80%, 100% 80%, 100% 100%, 0 100%);
+            margin-top: -20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* 2. MAIN LAYOUT (SIDEBAR + CONTENT) */
+        .dashboard-container {
             display: flex;
             min-height: 100vh;
         }
 
-        /* SIDEBAR STYLE */
+        /* SIDEBAR */
         .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            border-right: 2px solid #333;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-        }
-
-        .sidebar-header {
-            padding: 0 20px;
-            margin-bottom: 30px;
-        }
-
-        .sidebar-header h2 {
-            color: var(--primary-orange);
-            font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-            color: var(--text-gray);
-            font-weight: 500;
-            border-left: 4px solid transparent;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            background: #2a2a2a;
+            width: 280px;
+            background-color: var(--v-sidebar);
             color: white;
-            border-left: 4px solid var(--primary-orange);
+            padding-top: 30px;
         }
 
-        .nav-icon {
-            margin-right: 15px;
-            font-size: 18px;
-        }
-
-        /* MAIN CONTENT STYLE */
-        .main-area {
-            flex-grow: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .header-top h1 {
-            margin: 0;
-            font-weight: 600;
-        }
-
-        /* PROFILE BAR */
-        .profile-bar {
-            background: var(--card-bg);
-            padding: 15px 25px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .profile-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .avatar-circle {
-            width: 45px;
-            height: 45px;
-            background: #444;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid var(--primary-orange);
-        }
-
-        .btn-orange {
-            background: var(--primary-orange);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* GRID SYSTEM */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 8px solid var(--primary-orange);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--primary-orange);
-            font-style: italic;
-            margin-top: 0;
-            font-size: 24px;
-        }
-
-        .card p {
-            color: var(--text-gray);
-            line-height: 1.6;
-        }
-
-        .card-footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>VCRT Panel</h2>
-        </div>
-        <div class="nav-item active"><span>⊞</span> &nbsp; Dashboard</div>
-        <div class="nav-item"><span>📊</span> &nbsp; Analytics</div>
-        <div class="nav-item"><span>👤</span> &nbsp; Profile</div>
-        <div class="nav-item"><span>⚙️</span> &nbsp; Settings</div>
-        <div class="nav-item" onclick="window.location.href='index.html'" style="margin-top: auto; color: #ff6b6b;">
-            <span>🚪</span> &nbsp; Logout
-        </div>
-    </div>
-
-    <div class="main-area">
-        <div class="header-top">
-            <h1 id="welcome-text">VCRT Panel</h1>
-            <div style="color: var(--text-gray);">
-                Status: <span style="color: #2ecc71;">● Online</span>
-            </div>
-        </div>
-
-        <div class="profile-bar">
-            <div class="profile-info">
-                <div class="avatar-circle">👤</div>
-                <div>
-                    <div style="font-size: 14px; color: var(--text-gray);">User Profile</div>
-                    <div id="display-name" style="font-weight: bold;">Loading...</div>
-                </div>
-            </div>
-            <button class="btn-orange">Edit Profile</button>
-        </div>
-
-        <p style="color: var(--text-gray); margin-bottom: 20px;">Main Content</p>
-
-        <div class="dashboard-grid">
-            <div class="card">
-                <h3>DASHBOARD</h3>
-                <p>This is your primary overview of the Velocity Academy Racing Engineering Speed system. Monitor your build progress here.</p>
-                <div class="card-footer">REF: 000000 P</div>
-            </div>
-            
-            <div class="card">
-                <h3>ENGINE STATS</h3>
-                <p>Telemetry data is being pulled from the main server. All systems are currently within optimal temperature ranges.</p>
-                <div class="card-footer">REF: 000001 P</div>
-            </div>
-
-            <div class="card">
-                <h3>BUILD LOGS</h3>
-                <p>Track every modification made to the chassis and the aerodynamic components in this section.</p>
-                <div class="card-footer">REF: 000002 P</div>
-            </div>
-
-            <div class="card">
-                <h3>REPORTS</h3>
-                <p>Download the weekly performance reports and engineering speed analysis for your specific usercode.</p>
-                <div class="card-footer">REF: 000003 P</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Get the username from sessionStorage (set during login)
-        const activeUser = sessionStorage.getItem("activeUser");
-        
-        if (activeUser) {
-            document.getElementById("welcome-text").innerText = "Welcome, " + activeUser;
-            document.getElementById("display-name").innerText = activeUser.toUpperCase();
-        } else {
-            // If someone tries to access without logging in, send them back
-            window.location.href = "index.html";
-        }
-    </script>
-</body>
-</html>
+        .sidebar-title {
+            color: var(--v-orange);
