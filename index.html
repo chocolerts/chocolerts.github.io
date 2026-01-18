@@ -135,12 +135,8 @@
         var foundUser = users.find(u => u.name === user && u.code === pass);
 
         if (foundUser) {
-            // Success! 
-            document.getElementById("login-section").style.display = "none";
-            document.getElementById("content-section").style.display = "block";
-            // Makes the page look "cleaner" after login
-            document.body.style.backgroundColor = "#ffffff";
-            document.body.style.color = "#000000";
+            sessionStorage.setItem("activeUser", foundUser.name); // Saves the name for the next page
+            window.location.href = "dashboard.html"; // Sends user to the new dashboard file
         } else {
             // Error!
             error.style.display = "block";
