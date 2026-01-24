@@ -24,7 +24,23 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-align: center;
             width: 300px;
+            position: relative; /* Added this to help position the back button */
         }
+
+        /* --- NEW BACK BUTTON STYLE --- */
+        .back-to-home {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .back-to-home:hover {
+            color: #007bff;
+        }
+        /* ----------------------------- */
+
         input {
             width: 100%;
             padding: 12px;
@@ -36,10 +52,10 @@
             box-sizing: border-box;
         }
         .box-logo {
-            width: 120px;         /* Adjust this number to make it bigger or smaller */
-            height: auto;        /* Keeps the proportions correct */
-            margin-bottom: 8px; /* Adds space between the logo and "VCRT" */
-            border-radius: 10px; /* Optional: gives your logo rounded corners */
+            width: 120px;
+            height: auto;
+            margin-bottom: 8px;
+            border-radius: 10px;
         }
         .forgot-link {
             display: block;
@@ -92,6 +108,8 @@
 <body>
 
     <div class="login-card" id="login-section">
+        <a href="index.html" class="back-to-home">← Back to Home</a>
+
         <img src="vcrt kelabu.png" alt="Logo" class="box-logo">
         
         <h2>VCRT</h2>
@@ -124,21 +142,18 @@
         var pass = document.getElementById("password").value;
         var error = document.getElementById("error-msg");
 
-        // LIST OF AUTHORIZED USERS
         var users = [
             { name: "choco", code: "haziq" },
             { name: "zeeqy", code: "haziq" },
-            { name: "baem", code: "haziq" } // Add as many as you want here
+            { name: "baem", code: "haziq" }
         ];
 
-        // This checks if the typed info matches anyone in the list
         var foundUser = users.find(u => u.name === user && u.code === pass);
 
         if (foundUser) {
-            sessionStorage.setItem("activeUser", foundUser.name); // Saves the name for the next page
-            window.location.href = "dashboard.html"; // Sends user to the new dashboard file
+            sessionStorage.setItem("activeUser", foundUser.name);
+            window.location.href = "dashboard.html"; 
         } else {
-            // Error!
             error.style.display = "block";
         }
     }
